@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 ruby "1.9.3"
 gem 'rails', '3.2.3'
 gem 'bootstrap-sass', '2.0.0'
+
+# avoid heroku deprecation warnings for rails 4
 gem 'rails_12factor'
 
 group :development, :test do 
@@ -30,5 +32,6 @@ group :test do
 	gem 'spork', '0.9.0'
 end
 
-group :production do gem 'pg', '0.12.2'
+group :production do 
+	gem 'pg', '0.12.2'
 end
