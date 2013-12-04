@@ -1,6 +1,5 @@
 RailsTutorial323::Application.routes.draw do
-  #TODO eliminate get statement to follow RESTful route conventions
-  get "users/new"
+  resources :users
 
   root to: "static_pages#home"
 

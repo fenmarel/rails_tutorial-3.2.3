@@ -1,5 +1,15 @@
 @import "bootstrap";
 
+/* mixins, variables, etc. */
+$grayMediumLight: #eaeaea;
+
+@mixin box_sizing { 
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box;
+}
+
+/* main stuff */
 html {
 	overflow-y: scroll;
 }
@@ -25,7 +35,6 @@ textarea {
 }
 
 /* typography */
-
 h1, h2, h3, h4, h5, h6 { 
 	line-height: 1;
 }
@@ -59,9 +68,7 @@ p{
 	line-height: 1.7em;
 }
 
-
 /* header */
-
 #logo {
 	float: left; 
 	margin-right: 10px; 
@@ -81,7 +88,6 @@ p{
 
 
 /* footer */
-
 footer {
 	margin-top: 45px;
 	padding-top: 5px;
@@ -107,6 +113,15 @@ footer {
 	small { 
 		float: left;
 	}
+}
+
+/* miscellaneous */
+.debug_dump {
+	clear: both;
+	float: left;
+	width: 100%; 
+	margin-top: 45px; 
+	@include box_sizing;
 }
 
 
