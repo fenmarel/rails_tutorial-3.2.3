@@ -29,8 +29,9 @@ describe User do
 	# validity check
 	it { should be_valid }
 
-	# password authentication
+	# password authentication and session features
 	it { should respond_to(:authenticate) }
+	it { should respond_to(:remember_token) }
 
 	describe 'when user name is not present' do
 		before { @user.name = ' ' }
@@ -109,6 +110,11 @@ describe User do
 	describe "with a password that's too short" do
 		before { @user.password = @user.password_confirmation = "a" * 5 } 
 		it { should be_invalid }
+	end
+
+	describe "remember token" do
+		before { @user.save }
+		its(:remember_token) { should_not be_blank }
 	end
 end
 
