@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 		if user && user.authenticate(params[:session][:password])
 			# sign in and render user profile
 			sign_in user
-			redirect_to user
+			redirect_back_or user
 		else
 			# output error message and redirect back to signin
 			flash.now[:error] = "Invalid user email or password, please retry."
