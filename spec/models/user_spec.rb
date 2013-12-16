@@ -37,6 +37,9 @@ describe User do
 	it { should be_valid }
 	it { should_not be_admin }
 
+	# micropost support
+	it { should respond_to(:microposts) }
+
 	describe 'with admin attribute set to true' do
 		before { @user.toggle!(:admin) }
 
@@ -125,6 +128,25 @@ describe User do
 	describe "remember token" do
 		before { @user.save }
 		its(:remember_token) { should_not be_blank }
+	end
+
+	# micropost section
+	describe "micropost associations" do
+		before { @user.save }
+		let!(:older) { FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago) }
+		let!(:newer) { FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago) }
+
+		it "should return microposts in the correct order" do
+			@user.microposts.should == [newer, older]
+		end
+
+		it "should destroy associated microposts when user is destroyed" do
+			microposts = @user.microposts
+			@user.destroy
+			microposts.each do |mp|
+				Micropost.find_by_id(mp.id).should be_nil
+			end
+		end
 	end
 end
 
