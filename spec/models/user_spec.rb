@@ -39,6 +39,7 @@ describe User do
 
 	# micropost support
 	it { should respond_to(:microposts) }
+	it { should respond_to(:feed) }
 
 	describe 'with admin attribute set to true' do
 		before { @user.toggle!(:admin) }
@@ -146,6 +147,14 @@ describe User do
 			microposts.each do |mp|
 				Micropost.find_by_id(mp.id).should be_nil
 			end
+		end
+
+		describe "status" do
+			let(:unfollowed_post) { FactoryGirl.create(:micropost, user: FactoryGirl.create(:user)) }
+			
+			its(:feed) { should include(newer) }
+			its(:feed) { should include(older) }
+			its(:feed) { should_not include(unfollowed_post) }
 		end
 	end
 end
