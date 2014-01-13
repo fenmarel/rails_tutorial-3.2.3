@@ -40,6 +40,7 @@ describe User do
 	# micropost support
 	it { should respond_to(:microposts) }
 	it { should respond_to(:feed) }
+	it { should respond_to(:relationships) }
 
 	describe 'with admin attribute set to true' do
 		before { @user.toggle!(:admin) }
